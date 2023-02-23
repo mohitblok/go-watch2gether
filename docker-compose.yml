@@ -1,7 +1,7 @@
 version: '3'
 services:
   watch2gther:
-    image: robrotheram/watch2gether:latest
+    image: mohitpundir28/watch2gether:latest
     container_name: watch2gether
     deploy:
       replicas: 1

@@ -1,20 +1,20 @@
-VER=0.10.2
+VER=0.10.3
 
 build-server:
-	sed -i '/ /s/".*"/"${VER}"/' server/pkg/datastore/version.go
+	gsed -i '/ /s/".*"/"${VER}"/' server/pkg/datastore/version.go
 	cd server; CGO_ENABLED=0 GOOS=linux go build -o ../.
 
 build-ui:
 	cd ui; yarn; yarn build
-	sed -i 's/{WATCH2GETHER_VERSION}/$(VER)/g' ui/build/index.html
+	gsed -i 's/{WATCH2GETHER_VERSION}/$(VER)/g' ui/build/index.html
 
 build-docker:
-	docker build . -t robrotheram/watch2gether:${VER}
-	docker build . -t robrotheram/watch2gether:latest
+	# docker build . --platform linux/amd64 -t mohitpundir28/watch2gether:${VER} 
+	docker build . --platform linux/amd64 -t mohitpundir28/watch2gether:latest
 	
 publish:
-	docker push robrotheram/watch2gether:${VER}
-	docker push robrotheram/watch2gether:latest
+	# docker push mohitpundir28/watch2gether:${VER}
+	# docker push mohitpundir28/watch2gether:latest
 
 build: build-server build-ui build-docker
 
